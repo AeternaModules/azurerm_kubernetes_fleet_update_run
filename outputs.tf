@@ -1,3 +1,7 @@
+output "kubernetes_fleet_update_runs_id" {
+  description = "Map of id values across all kubernetes_fleet_update_runs, keyed the same as var.kubernetes_fleet_update_runs"
+  value       = { for k, v in azurerm_kubernetes_fleet_update_run.kubernetes_fleet_update_runs : k => v.id }
+}
 output "kubernetes_fleet_update_runs_fleet_update_strategy_id" {
   description = "Map of fleet_update_strategy_id values across all kubernetes_fleet_update_runs, keyed the same as var.kubernetes_fleet_update_runs"
   value       = { for k, v in azurerm_kubernetes_fleet_update_run.kubernetes_fleet_update_runs : k => v.fleet_update_strategy_id }
