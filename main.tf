@@ -19,7 +19,7 @@ resource "azurerm_kubernetes_fleet_update_run" "kubernetes_fleet_update_runs" {
   }
 
   dynamic "stage" {
-    for_each = each.value.stage != null ? [each.value.stage] : []
+    for_each = each.value.stage != null ? each.value.stage : []
     content {
       after_stage_wait_in_seconds = stage.value.after_stage_wait_in_seconds
       dynamic "group" {

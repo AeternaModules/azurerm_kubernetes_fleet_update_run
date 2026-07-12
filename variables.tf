@@ -32,18 +32,18 @@ EOT
         type               = string
       })
     })
-    stage = optional(object({
+    stage = optional(list(object({
       after_stage_wait_in_seconds = optional(number)
       group = list(object({
         name = string
       }))
       name = string
-    }))
+    })))
   }))
   validation {
     condition = alltrue([
       for k, v in var.kubernetes_fleet_update_runs : (
-        length(v.stage.group) >= 1
+        v.stage == null || alltrue([for item in v.stage : (length(item.group) >= 1)])
       )
     ])
     error_message = "Each group list must contain at least 1 items"
