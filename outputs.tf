@@ -12,7 +12,7 @@ output "kubernetes_fleet_update_runs_kubernetes_fleet_manager_id" {
 }
 output "kubernetes_fleet_update_runs_managed_cluster_update" {
   description = "Map of managed_cluster_update values across all kubernetes_fleet_update_runs, keyed the same as var.kubernetes_fleet_update_runs"
-  value       = { for k, v in azurerm_kubernetes_fleet_update_run.kubernetes_fleet_update_runs : k => v.managed_cluster_update if v.managed_cluster_update != null && length(v.managed_cluster_update) > 0 }
+  value       = { for k, v in azurerm_kubernetes_fleet_update_run.kubernetes_fleet_update_runs : k => one(v.managed_cluster_update) if v.managed_cluster_update != null && length(v.managed_cluster_update) > 0 }
 }
 output "kubernetes_fleet_update_runs_name" {
   description = "Map of name values across all kubernetes_fleet_update_runs, keyed the same as var.kubernetes_fleet_update_runs"
